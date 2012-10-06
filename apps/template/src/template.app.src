@@ -1,0 +1,12 @@
+{application, template,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { template_app, []}},
+  {env, []}
+ ]}.

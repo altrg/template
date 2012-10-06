@@ -1,0 +1,2 @@
+-define(L(Term), lager:info("~240p", [Term])).
+-define(L(Fmt, Args), lager:info(Fmt, Args)).
