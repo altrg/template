@@ -1,2 +1,7 @@
+-ifndef(TEST).
 -define(L(Term), lager:info("~240p", [Term])).
 -define(L(Fmt, Args), lager:info(Fmt, Args)).
+-else.
+-define(L(Term), io:format(user, "~s:~w ~240p\n", [?FILE, ?LINE, Term])).
+-define(L(Fmt, Args), io:format(user, "~s:~w "++Fmt++"\n", [?FILE, ?LINE | Args])).
+-endif.
