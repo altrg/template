@@ -15,7 +15,6 @@ Usage
 -----
 
 * App config files: priv/*.conf
-* Log macroses: ?L()
-* Hot reload + unit tests from console: make:all().
+* Log macroses: ?D()
 * Adding apps: edit rebar.config,  make
 * Releases, upgrades, etc: see rebar docs

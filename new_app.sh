@@ -18,7 +18,6 @@ mv template.hrl $1.hrl
 mv template.erl $1.erl
 
 cd ../../..
-sed -i "s/template/$1/g" Emakefile
 sed -i "s/template/$1/g" Makefile
 sed -i "s/template/$1/g" rebar.config
 mv apps/template apps/$1

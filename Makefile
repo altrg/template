@@ -7,4 +7,4 @@ deps:
 	./rebar compile
 
 run:
-	ERL_LIBS=apps:deps erl +K true -s reloader -sname template -s template_app
+	ERL_LIBS=apps:deps erl +K true -sname template -s template_app
