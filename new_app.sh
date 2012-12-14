@@ -21,6 +21,6 @@ cd ../../..
 sed -i "s/template/$1/g" Makefile
 sed -i "s/template/$1/g" rebar.config
 mv apps/template apps/$1
-mv priv/template.conf priv/$1.conf
+mv priv/template.cfg priv/$1.cfg
 
 rm $0

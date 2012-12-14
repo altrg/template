@@ -13,8 +13,9 @@
 %% ===================================================================
 %% @doc Launcher for erl .. -s template_app ..
 start() ->
-    start_lager(),
-    application:start(template).
+    app_start(lager),
+    %load_config(kernel),
+    app_start(template).
 
 %% @doc Get value or default from config
 -spec get_config(atom(), term()) -> term().
@@ -29,7 +30,6 @@ get_config(Par, Default) ->
 %% ===================================================================
 
 start(_StartType, _StartArgs) ->
-    load_config(template, "priv/template.conf"),
     template_sup:start_link().
 
 stop(_State) ->
@@ -38,11 +38,11 @@ stop(_State) ->
 %% ===================================================================
 %% Internal
 %% ===================================================================
-load_config(App, Config) ->
-    {ok, Conf} = file:consult(Config),
+load_config(App) ->
+    {ok, Conf} = file:consult("priv/"++atom_to_list(App)++".cfg"),
     [application:set_env(App, K, V) || {K, V} <- Conf].
 
-start_lager() ->
-    application:load(lager),
-    load_config(lager, "priv/lager.conf"),
-    lager:start().
+app_start(App) ->
+    application:load(App),
+    load_config(App),
+    application:start(App).
