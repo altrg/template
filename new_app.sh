@@ -28,3 +28,8 @@ sed -i "s/template/$1/g" rebar.config
 mv apps/template apps/$1
 
 rm $0
+
+rm -rf .git
+git init
+git add .
+git commit -m "initial"

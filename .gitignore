@@ -4,4 +4,5 @@ deps/
 *~
 .#*
 erl_crash.dump
-log/
+priv/log/
+priv/run_erl/

@@ -1,23 +1,31 @@
+RUN_ERL_LOG_MAXSIZE=10485760
+RUN_ERL_DIR=priv/run_erl/
+REBAR=@./rebar
 
-all:
-	@./rebar compile
+.PHONY: deps
+
+all: compile
+
+compile:
+	$(REBAR) compile skip_deps=true
 
 deps:
-	@./rebar get-deps
-	@./rebar compile
+	$(REBAR) get-deps
+	$(REBAR) compile
 
 clean:
-	@./rebar clean
+	$(REBAR) clean
+	@rm -f erl_crash.dump
 
 run:
-	ERL_LIBS=apps:deps erl +K true -config priv/node -sname template -s template_app
+	@ERL_LIBS=apps:deps erl +K true -config priv/node -sname template -s template_app
 
 start:
-	@mkdir -p log/pipe
-	@run_erl -daemon log/pipe/ log "exec make run"
+	@mkdir -p $(RUN_ERL_DIR)
+	@run_erl -daemon $(RUN_ERL_DIR) $(RUN_ERL_DIR) "exec make run"
 
 attach:
-	@to_erl log/pipe/
+	@to_erl $(RUN_ERL_DIR)
 
 stop:
-	@echo "init:stop()." | to_erl log/pipe/ 2>/dev/null
+	@echo "init:stop()." | to_erl $(RUN_ERL_DIR) 2>/dev/null
