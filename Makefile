@@ -1,3 +1,4 @@
+NODE_NAME=template
 RUN_ERL_LOG_MAXSIZE=10485760
 RUN_ERL_DIR=priv/run_erl/
 REBAR=@./rebar
@@ -18,7 +19,7 @@ clean:
 	@rm -f erl_crash.dump
 
 run:
-	@ERL_LIBS=apps:deps erl +K true -config priv/node -sname template -s template_app
+	@ERL_LIBS=apps:deps erl +K true -config priv/apps -sname $(NODE_NAME) -s template_app
 
 start:
 	@mkdir -p $(RUN_ERL_DIR)

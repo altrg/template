@@ -18,7 +18,7 @@ mv template.hrl $1.hrl
 mv template.erl $1.erl
 
 cd ../../../priv
-sed -i "s/template/$1/g" node.config
+sed -i "s/template/$1/g" apps.config
 mv template.cfg $1.cfg
 
 cd ..
@@ -27,9 +27,6 @@ sed -i "s/template/$1/g" rebar.config
 
 mv apps/template apps/$1
 
+rm README.md
 rm $0
-
 rm -rf .git
-git init
-git add .
-git commit -m "initial"
