@@ -1,6 +1,9 @@
-NODE_NAME=template
-RUN_ERL_LOG_MAXSIZE=10485760
-RUN_ERL_DIR=priv/run_erl/
+NODE=template
+CFG=template.cfg
+
+APP=template_app
+RE_LOG_MAXSIZE=10000000
+RE_DIR=priv/run_erl/
 REBAR=@./rebar
 
 .PHONY: deps
@@ -19,14 +22,14 @@ clean:
 	@rm -f erl_crash.dump
 
 run:
-	@ERL_LIBS=apps:deps erl +K true -config priv/apps -sname $(NODE_NAME) -s template_app
+	@ERL_LIBS=apps:deps erl +K true -config priv/apps -s $(APP) -sname $(NODE) -cfg $(CFG)
 
 start:
-	@mkdir -p $(RUN_ERL_DIR)
-	@run_erl -daemon $(RUN_ERL_DIR) $(RUN_ERL_DIR) "exec make run"
+	@mkdir -p $(RE_DIR)
+	@run_erl -daemon $(RE_DIR) $(RE_DIR) "exec make run"
 
 attach:
-	@to_erl $(RUN_ERL_DIR)
+	@to_erl $(RE_DIR)
 
 stop:
-	@echo "init:stop()." | to_erl $(RUN_ERL_DIR) 2>/dev/null
+	@echo "init:stop()." | to_erl $(RE_DIR) 2>/dev/null

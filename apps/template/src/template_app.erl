@@ -13,7 +13,6 @@
 %% ===================================================================
 %% @doc Launcher for erl .. -s template_app ..
 start() ->
-    application:start(lager),
     application:start(template).
 
 %% @doc Get value or default from config
@@ -29,9 +28,23 @@ get_config(Par, Default) ->
 %% ===================================================================
 
 start(_StartType, _StartArgs) ->
-    {ok, Conf} = file:consult("priv/template.cfg"),
-    [application:set_env(template, K, V) || {K, V} <- Conf],
+    {ok, [[CfgFile]]} = init:get_argument(cfg),
+    load_config(CfgFile),
+    start_log(),
+    %[application:start(App) || App <- []],
     template_sup:start_link().
 
 stop(_State) ->
     ok.
+
+%% ===================================================================
+%% Application callbacks
+%% ===================================================================
+%% @doc Save config to app environment
+load_config(CfgFile) ->
+    {ok, Cfg} = file:consult(CfgFile),
+    [application:set_env(template, Key, Val) || {Key, Val} <- Cfg].
+
+%% @doc Start logging
+start_log() ->
+    application:start(lager).

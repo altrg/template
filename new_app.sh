@@ -19,11 +19,11 @@ mv template.erl $1.erl
 
 cd ../../../priv
 sed -i "s/template/$1/g" apps.config
-mv template.cfg $1.cfg
 
 cd ..
 sed -i "s/template/$1/g" Makefile
 sed -i "s/template/$1/g" rebar.config
+mv template.cfg $1.cfg
 
 mv apps/template apps/$1
 

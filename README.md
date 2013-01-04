@@ -14,7 +14,7 @@ Getting started
 Usage
 -----
 
-* App config files: priv/*.cfg
+* App config file: appname.cfg
 * Log macroses: ?D()
-* Adding apps: edit rebar.config,  make
+* Adding apps: edit rebar.config, make deps
 * Releases, upgrades, etc: see rebar docs
