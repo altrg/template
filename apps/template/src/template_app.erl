@@ -13,7 +13,7 @@
 %% ===================================================================
 %% @doc Launcher for erl .. -s template_app ..
 start() ->
-    application:start(template).
+    application:start(template, permanent).
 
 %% @doc Get value or default from config
 -spec get_config(atom(), term()) -> term().

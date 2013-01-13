@@ -6,20 +6,17 @@ RE_LOG_MAXSIZE=10000000
 RE_DIR=priv/run_erl/
 REBAR=@./rebar
 
-.PHONY: deps
+.PHONY: all deps
 
-all: compile
-
-compile:
+all:
 	$(REBAR) compile skip_deps=true
 
 deps:
-	$(REBAR) get-deps
-	$(REBAR) compile
+	$(REBAR) get-deps compile
 
 clean:
 	$(REBAR) clean
-	@rm -f erl_crash.dump
+	@rm -rf erl_crash.dump
 
 run:
 	@ERL_LIBS=apps:deps erl +K true -config priv/apps -s $(APP) -sname $(NODE) -cfg $(CFG)
