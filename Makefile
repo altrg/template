@@ -19,7 +19,7 @@ clean:
 	@rm -rf erl_crash.dump
 
 run:
-	@ERL_LIBS=apps:deps erl +K true -config priv/apps -s $(APP) -sname $(NODE) -cfg $(CFG)
+	@ERL_LIBS=deps erl +K true -pa ebin -config priv/apps -s $(APP) -sname $(NODE) -cfg $(CFG)
 
 start:
 	@mkdir -p $(RE_DIR)

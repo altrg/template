@@ -4,5 +4,6 @@ deps/
 *~
 .#*
 erl_crash.dump
+*.beam
 priv/log/
 priv/run_erl/

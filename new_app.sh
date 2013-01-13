@@ -5,7 +5,7 @@ if [ -z $1 ]; then
     exit 1
 fi
 
-cd apps/template/src
+cd src
 sed -i "s/template/$1/g" template.app.src
 sed -i "s/template/$1/g" template_app.erl
 sed -i "s/template/$1/g" template_sup.erl
@@ -14,18 +14,18 @@ sed -i "s/template/$1/g" template.erl
 mv template.app.src $1.app.src
 mv template_app.erl $1_app.erl
 mv template_sup.erl $1_sup.erl
-mv template.hrl $1.hrl
 mv template.erl $1.erl
 
-cd ../../../priv
+cd ../include
+mv template.hrl $1.hrl
+
+cd ../priv
 sed -i "s/template/$1/g" apps.config
 
 cd ..
 sed -i "s/template/$1/g" Makefile
 sed -i "s/template/$1/g" rebar.config
 mv template.cfg $1.cfg
-
-mv apps/template apps/$1
 
 rm README.md
 rm $0
