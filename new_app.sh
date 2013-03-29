@@ -6,25 +6,17 @@ if [ -z $1 ]; then
 fi
 
 cd src
-sed -i "s/template/$1/g" template.app.src
-sed -i "s/template/$1/g" template_app.erl
-sed -i "s/template/$1/g" template_sup.erl
-sed -i "s/template/$1/g" template.hrl
-sed -i "s/template/$1/g" template.erl
+sed -i "s/template/$1/g" *
 mv template.app.src $1.app.src
 mv template_app.erl $1_app.erl
 mv template_sup.erl $1_sup.erl
 mv template.erl $1.erl
-
-cd ../include
 mv template.hrl $1.hrl
-
-cd ../priv
-sed -i "s/template/$1/g" apps.config
 
 cd ..
 sed -i "s/template/$1/g" Makefile
 sed -i "s/template/$1/g" rebar.config
+sed -i "s/template/$1/g" template.cfg
 mv template.cfg $1.cfg
 
 rm README.md
