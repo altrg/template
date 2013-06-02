@@ -8,6 +8,7 @@
 -export([start/2, stop/1]).
 
 -define(APPS, [lager]).
+-define(AUTOSTART_APPS, [lager]).
 
 %% ===================================================================
 %% API
@@ -30,7 +31,9 @@ get_config(Par, Default) ->
 start(_StartType, _StartArgs) ->
     [application:load(App) || App <- ?APPS],
     load_config(),
-    [application:start(App) || App <- ?APPS],
+    % config_custom(),
+    [application:start(App) || App <- ?AUTOSTART_APPS],
+    % start_custom(),
     lager:info("Starting template"),
     template_sup:start_link().
 
