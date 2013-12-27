@@ -2,7 +2,7 @@ NODE=template
 CFG=template.cfg
 
 APP=template_app
-ERL=@ERL_LIBS=deps erl +K true -pa ebin
+ERL=@ERL_LIBS=apps:deps erl +K true
 RE_LOG_MAXSIZE=10000000
 RE_DIR=log/run_erl/
 REBAR=@./rebar
@@ -35,3 +35,12 @@ stop:
 	@echo -n "Stopping $(NODE).."
 	@echo "init:stop()." | to_erl $(RE_DIR) 2>/dev/null
 	@echo "ok"
+
+.dialyzer.plt:
+	@ERL_LIBS=apps:deps dialyzer --build_plt --output_plt .dialyzer.plt \
+	--apps erts kernel stdlib lager \
+	template || true
+
+dialyze: .dialyzer.plt all
+	@dialyzer apps/template/ebin --plt .dialyzer.plt --no_native \
+	-Werror_handling -Wunderspecs -Wrace_conditions

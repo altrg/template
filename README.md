@@ -15,6 +15,6 @@ Usage
 -----
 
 * App config file: appname.cfg
-* Log macroses: ?D()
+* Log macroses: ?DEBUG, ?INFO, ?ERROR
 * Adding apps: edit rebar.config, make deps
 * Releases, upgrades, etc: see rebar docs

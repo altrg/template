@@ -1,6 +1,8 @@
 -module(template_app).
 -behaviour(application).
 
+-include("template.hrl").
+
 %% API
 -export([start/0, get_config/2]).
 
@@ -8,7 +10,6 @@
 -export([start/2, stop/1]).
 
 -define(APPS, [lager]).
--define(AUTOSTART_APPS, [lager]).
 
 %% ===================================================================
 %% API
@@ -31,10 +32,8 @@ get_config(Par, Default) ->
 start(_StartType, _StartArgs) ->
     [application:load(App) || App <- ?APPS],
     load_config(),
-    % config_custom(),
-    [application:start(App) || App <- ?AUTOSTART_APPS],
-    % start_custom(),
-    lager:info("Starting template"),
+    lager:start(),
+    ?INFO("Starting template"),
     template_sup:start_link().
 
 stop(_State) ->

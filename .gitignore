@@ -7,3 +7,4 @@ deps/
 erl_crash.dump
 *.beam
 log/
+.dialyzer.plt

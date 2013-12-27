@@ -5,13 +5,16 @@ if [ -z $1 ]; then
     exit 1
 fi
 
-cd src
+cd apps/template/src
 sed -i "s/template/$1/g" *
 mv template.app.src $1.app.src
 mv template_app.erl $1_app.erl
 mv template_sup.erl $1_sup.erl
 mv template.erl $1.erl
 mv template.hrl $1.hrl
+
+cd ../..
+mv template $1
 
 cd ..
 sed -i "s/template/$1/g" Makefile
