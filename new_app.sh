@@ -18,6 +18,7 @@ mv template $1
 
 cd ..
 sed -i "s/template/$1/g" Makefile
+sed -i "s/template/$1/g" Emakefile
 sed -i "s/template/$1/g" rebar.config
 sed -i "s/template/$1/g" template.cfg
 mv template.cfg $1.cfg
